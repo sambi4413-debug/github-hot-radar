@@ -1,0 +1,60 @@
+name: Publish RADARLAB
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 9 * * *'
+      timezone: Asia/Singapore
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+
+      - name: Refresh daily news snapshot
+        if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
+        shell: pwsh
+        env:
+          RADARLAB_NEWS_API_URL: ${{ secrets.RADARLAB_NEWS_API_URL }}
+        run: |
+          ./refresh-news.ps1
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git diff --quiet -- api/research-news.json
+          if ($LASTEXITCODE -eq 0) {
+            Write-Output 'No news snapshot changes.'
+            exit 0
+          }
+          git add api/research-news.json
+          git commit -m 'chore: refresh daily research snapshot'
+          git push
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,30 @@
+{
+  "capturedAt": "2026-09-03",
+  "assets": [
+    {
+      "file": "science-trna-figure-page.png",
+      "source": "https://www.nature.com/articles/s41586-023-06133-1/figures/2",
+      "status": "captured"
+    },
+    {
+      "file": "nature-cart-figure.png",
+      "source": "https://www.nature.com/articles/s41563-026-02675-7",
+      "status": "captured from the article Figures panel"
+    },
+    {
+      "file": "nature-gut-figure.png",
+      "source": "https://www.nature.com/articles/s41563-026-02690-8",
+      "status": "captured from the article Figures panel"
+    },
+    {
+      "file": "anthropic-mhs-figure.png",
+      "source": "https://www.anthropic.com/news/model-hardware-standard-research-preview",
+      "status": "captured from the official article image"
+    },
+    {
+      "file": null,
+      "source": "https://www.reuters.com/technology/nvidia-talks-acquire-hugging-face-13-billion-deal-business-insider-reports-2026-08-27/",
+      "status": "not captured: verification protection"
+    }
+  ]
+}
