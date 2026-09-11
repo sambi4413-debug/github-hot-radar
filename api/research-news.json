@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-10T09:00:00+08:00",
+  "updatedAt": "2026-09-10T01:00:00+00:00",
   "schedule": "09:00 Asia/Singapore",
   "items": [
     {
@@ -142,6 +142,6 @@
       "graphicNote": "公开摘要可核对，全文为订阅内容"
     }
   ],
-  "checkedAt": "2026-09-10T20:03:18+08:00",
+  "checkedAt": "2026-09-11T01:05:35+00:00",
   "refreshSource": "local"
 }
